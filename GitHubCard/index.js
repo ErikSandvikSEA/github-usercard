@@ -2,6 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get('https://api.github.com/users/ErikSandvikSEA')
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -25,26 +26,75 @@
 */
 
 const followersArray = [];
+const cards = document.querySelector('.cards')
 
-/* Step 3: Create a function that accepts a single object as its only argument,
-          Using DOM methods and properties, create a component that will return the following DOM element:
+//  Step 3: Create a function that accepts a single object as its only argument,
+//           Using DOM methods and properties, create a component that will return the following DOM element:
 
-<div class="card">
-  <img src={image url of user} />
-  <div class="card-info">
-    <h3 class="name">{users name}</h3>
-    <p class="username">{users user name}</p>
-    <p>Location: {users location}</p>
-    <p>Profile:  
-      <a href={address to users github page}>{address to users github page}</a>
-    </p>
-    <p>Followers: {users followers count}</p>
-    <p>Following: {users following count}</p>
-    <p>Bio: {users bio}</p>
-  </div>
-</div>
+// <div class="card">
+//   <img src={image url of user} />
+//   <div class="card-info">
+//     <h3 class="name">{users name}</h3>
+//     <p class="username">{users user name}</p>
+//     <p>Location: {users location}</p>
+//     <p>Profile:  
+//       <a href={address to users github page}>{address to users github page}</a>
+//     </p>
+//     <p>Followers: {users followers count}</p>
+//     <p>Following: {users following count}</p>
+//     <p>Bio: {users bio}</p>
+//   </div>
+// </div>
 
-*/
+const cardCreator = ({ userImageURL, userName, userUsername, userLocation, githubURL, followerCount, followingCount, userBio }) => {
+
+const card = document.createElement('div')
+const cardImage = document.createElement('img')
+const cardInfo = document.createElement('div')
+const cardHeader = document.createElement('h3')
+const cardUserName = document.createElement('p')
+const cardUserLocation = document.createElement('p')
+const cardUserProfile = document.createElement('p')
+const cardUserFollowers = document.createElement('p')
+const cardUserFollowing = document.createElement('p')
+const cardUserBio = document.createElement('p')
+const cardLink = document.createElement('a')
+
+
+card.appendChild(cardImage)
+card.appendChild(cardInfo)
+cardInfo.appendChild(cardHeader)
+cardInfo.appendChild(cardUserName)
+cardInfo.appendChild(cardUserLocation)
+cardInfo.appendChild(cardUserProfile)
+cardInfo.appendChild(cardUserFollowers)
+cardInfo.appendChild(cardUserFollowing)
+cardInfo.appendChild(cardUserBio)
+cardUserProfile.appendChild(cardLink)
+
+
+card.classList.add('card')
+cardInfo.classList.add('card-info')
+cardHeader.classList.add('name')
+cardUserName.classList.add('username')
+
+cardImage.src = userImageURL
+cardHeader.textContent = userName
+cardUserName.textContent = userUsername
+cardUserLocation.textContent = `Location: ${userLocation}`
+cardLink.textContent = githubURL
+cardLink.href = githubURL
+cardUserProfile.textContent = `Profile: ${cardLink.textContent}`
+cardUserFollowing.textContent = `Followers: ${followerCount}`
+cardUserFollowing.textContent = `Following: ${followingCount}`
+cardUserBio.textContent = `Bio: ${userBio}`
+
+
+return card
+}
+
+const testResult = cardCreator({})
+
 
 /* List of LS Instructors Github username's: 
   tetondan
