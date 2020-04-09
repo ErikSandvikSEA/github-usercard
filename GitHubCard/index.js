@@ -93,7 +93,32 @@ cardUserBio.textContent = `Bio: ${userBio}`
 return card
 }
 
-const testResult = cardCreator({})
+const buildCard = (githubUsername) => {
+  axios.get(`https://api.github.com/users/${githubUsername}`)
+  .then(
+    response => {
+      const userImageURL = response.data.avatar_url
+      const userName = response.data.name
+      const userUsername = response.data.login
+      const userLocation = response.data.location
+      const githubURL = response.data.url 
+      const followerCount = response.data.followers 
+      const followingCount = response.data.following 
+      const userBio = response.data.bio
+      const newCard = cardCreator({
+        userImageURL: userImageURL, userName: userName, userUsername: userUsername, userLocation: userLocation, githubURL: githubURL, followerCount: followerCount, followingCount: followingCount, userBio: userBio
+      })
+      cards.appendChild(newCard)
+    }
+  )
+  .catch(
+    error => {
+    setInterval(function() {alert('Sorry, Please Try Again')}, 5000)
+}
+  )
+}
+
+const testResult = buildCard("ErikSandvikSEA")
 
 
 /* List of LS Instructors Github username's: 
