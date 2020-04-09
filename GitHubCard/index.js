@@ -398,6 +398,13 @@ cardUserBio.textContent = `Bio: ${userBio}`
 
 return card
 }
+const addCards = () => {
+  followersObjectArray.forEach(follower => {
+    followersArray.push(follower)
+  })
+}
+addCards()
+console.log(followersArray)
 
 const buildCard = (githubUsername) => {
   axios.get(`https://api.github.com/users/${githubUsername}`)
@@ -407,16 +414,19 @@ const buildCard = (githubUsername) => {
       const userName = response.data.name
       const userUsername = response.data.login
       const userLocation = response.data.location
-      const githubURL = response.data.url 
+      const githubURL = response.data.html_url
       const followerCount = response.data.followers 
       const followingCount = response.data.following 
       const userBio = response.data.bio
+
       const newCard = cardCreator({
         userImageURL: userImageURL, userName: userName, userUsername: userUsername, userLocation: userLocation, githubURL: githubURL, followerCount: followerCount, followingCount: followingCount, userBio: userBio
       })
       cards.appendChild(newCard)
     }
   )
+
+  
   .catch(
     error => {
     setInterval(function() {alert('Sorry, Please Try Again')}, 5000)
@@ -424,22 +434,19 @@ const buildCard = (githubUsername) => {
   )
 }
 
-const testResult = buildCard("ErikSandvikSEA")
+buildCard("ErikSandvikSEA")
 
-
-
-
-
-
-
-const addCards = () => {
-  followersArray.push('ErikSandvikSEA')
-  followersObjectArray.forEach(follower => {
-    followersArray.push(follower.login)
+const buildFollowerCards = (array => {
+  array.forEach(element => {
+    buildCard(element.login)
   })
-}
-addCards()
-console.log(followersArray)
+})
+
+buildFollowerCards(followersArray)
+
+
+
+
 // List of LS Instructors Github username's: 
   // addCards("tetondan")
   // addCards("justsml")
