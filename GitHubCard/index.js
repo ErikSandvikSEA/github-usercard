@@ -383,6 +383,12 @@ card.classList.add('card')
 cardInfo.classList.add('card-info')
 cardHeader.classList.add('name')
 cardUserName.classList.add('username')
+cardUserLocation.classList.add('card--close')
+cardUserProfile.classList.add('card--close')
+cardUserFollowers.classList.add('card--close')
+cardUserFollowing.classList.add('card--close')
+cardUserBio.classList.add('card--close')
+
 
 cardImage.src = userImageURL
 cardHeader.textContent = userName
@@ -394,6 +400,15 @@ cardUserProfile.textContent = `Profile: ${cardLink.textContent}`
 cardUserFollowers.textContent = `Followers: ${followerCount}`
 cardUserFollowing.textContent = `Following: ${followingCount}`
 cardUserBio.textContent = `Bio: ${userBio}`
+
+card.addEventListener('click', () => {
+  cardUserLocation.classList.toggle('card--close')
+  cardUserProfile.classList.toggle('card--close')
+  cardUserFollowers.classList.toggle('card--close')
+  cardUserFollowing.classList.toggle('card--close')
+  cardUserBio.classList.toggle('card--close')
+}
+)
 
 
 return card
@@ -407,7 +422,7 @@ addCards()
 console.log(followersArray)
 
 const buildCard = (githubUsername) => {
-  axios.get(`https://api.github.com/users/${githubUsername}`)
+  axios.get(`https://api.github.com/users/${githubUsername}`, { crossdomain: true })
   .then(
     response => {
       const userImageURL = response.data.avatar_url

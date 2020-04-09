@@ -204,3 +204,6 @@ body {
 	font-style: italic;
 	margin: 3px 0 10px;
 }
+.card--close {
+	display: none;
+}
