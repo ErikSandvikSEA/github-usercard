@@ -352,7 +352,7 @@ const cards = document.querySelector('.cards')
 //   </div>
 // </div>
 
-const cardCreator = ({ userImageURL, userName, userUsername, userLocation, githubURL, followerCount, followingCount, userBio }) => {
+const cardCreator = ( object ) => {
 
 const card = document.createElement('div')
 const cardImage = document.createElement('img')
@@ -375,12 +375,12 @@ cardInfo.appendChild(cardUserLocation)
 cardInfo.appendChild(cardUserProfile)
 cardInfo.appendChild(cardUserFollowers)
 cardInfo.appendChild(cardUserFollowing)
-cardInfo.appendChild(cardUserBio)
+cardInfo.appendChild(cardUserBio) 
 cardUserProfile.appendChild(cardLink)
 
 
 card.classList.add('card')
-cardInfo.classList.add('card-info')
+cardInfo.classList.add('card-info')          
 cardHeader.classList.add('name')
 cardUserName.classList.add('username')
 cardUserLocation.classList.add('card--close')
@@ -390,16 +390,15 @@ cardUserFollowing.classList.add('card--close')
 cardUserBio.classList.add('card--close')
 
 
-cardImage.src = userImageURL
-cardHeader.textContent = userName
-cardUserName.textContent = userUsername
-cardUserLocation.textContent = `Location: ${userLocation}`
-cardLink.textContent = githubURL
-cardLink.href = githubURL
-cardUserProfile.textContent = `Profile: ${cardLink.textContent}`
-cardUserFollowers.textContent = `Followers: ${followerCount}`
-cardUserFollowing.textContent = `Following: ${followingCount}`
-cardUserBio.textContent = `Bio: ${userBio}`
+cardImage.src = object.avatar_url
+cardHeader.textContent = object.name
+cardUserName.textContent = object.login
+cardUserLocation.textContent = `Location: ${object.location}`
+cardLink.textContent = `Profile: ${object.html_url}`
+cardLink.href = object.html_url
+cardUserFollowers.textContent = `Followers: ${object.followers}`
+cardUserFollowing.textContent = `Following: ${object.following}`
+cardUserBio.textContent = `Bio: ${object.bio}`
 
 card.addEventListener('click', () => {
   cardUserLocation.classList.toggle('card--close')
@@ -425,22 +424,11 @@ const buildCard = (githubUsername) => {
   axios.get(`https://api.github.com/users/${githubUsername}`, { crossdomain: true })
   .then(
     response => {
-      const userImageURL = response.data.avatar_url
-      const userName = response.data.name
-      const userUsername = response.data.login
-      const userLocation = response.data.location
-      const githubURL = response.data.html_url
-      const followerCount = response.data.followers 
-      const followingCount = response.data.following 
-      const userBio = response.data.bio
-
-      const newCard = cardCreator({
-        userImageURL: userImageURL, userName: userName, userUsername: userUsername, userLocation: userLocation, githubURL: githubURL, followerCount: followerCount, followingCount: followingCount, userBio: userBio
-      })
+      const newCard = cardCreator( response.data)
       cards.appendChild(newCard)
     }
   )
-
+ 
   
   .catch(
     error => {
