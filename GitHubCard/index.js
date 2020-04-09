@@ -391,7 +391,7 @@ cardUserLocation.textContent = `Location: ${userLocation}`
 cardLink.textContent = githubURL
 cardLink.href = githubURL
 cardUserProfile.textContent = `Profile: ${cardLink.textContent}`
-cardUserFollowing.textContent = `Followers: ${followerCount}`
+cardUserFollowers.textContent = `Followers: ${followerCount}`
 cardUserFollowing.textContent = `Following: ${followingCount}`
 cardUserBio.textContent = `Bio: ${userBio}`
 
