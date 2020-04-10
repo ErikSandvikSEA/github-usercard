@@ -365,10 +365,13 @@ const cardUserFollowers = document.createElement('p')
 const cardUserFollowing = document.createElement('p')
 const cardUserBio = document.createElement('p')
 const cardLink = document.createElement('a')
+const calendar = document.createElement('img')
+const calendarContainer = document.createElement('div')
 
 
 card.appendChild(cardImage)
 card.appendChild(cardInfo)
+card.appendChild(calendarContainer)
 cardInfo.appendChild(cardHeader)
 cardInfo.appendChild(cardUserName)
 cardInfo.appendChild(cardUserLocation)
@@ -376,7 +379,9 @@ cardInfo.appendChild(cardUserProfile)
 cardInfo.appendChild(cardUserFollowers)
 cardInfo.appendChild(cardUserFollowing)
 cardInfo.appendChild(cardUserBio) 
+calendarContainer.appendChild(calendar)
 cardUserProfile.appendChild(cardLink)
+
 
 
 card.classList.add('card')
@@ -388,6 +393,8 @@ cardUserProfile.classList.add('card--close')
 cardUserFollowers.classList.add('card--close')
 cardUserFollowing.classList.add('card--close')
 cardUserBio.classList.add('card--close')
+calendar.classList.add('card--close')
+calendarContainer.classList.add('calendar')
 
 
 cardImage.src = object.avatar_url
@@ -399,6 +406,7 @@ cardLink.href = object.html_url
 cardUserFollowers.textContent = `Followers: ${object.followers}`
 cardUserFollowing.textContent = `Following: ${object.following}`
 cardUserBio.textContent = `Bio: ${object.bio}`
+calendar.src = `http://ghchart.rshah.org/${object.login}`
 
 card.addEventListener('click', () => {
   cardUserLocation.classList.toggle('card--close')
@@ -406,6 +414,7 @@ card.addEventListener('click', () => {
   cardUserFollowers.classList.toggle('card--close')
   cardUserFollowing.classList.toggle('card--close')
   cardUserBio.classList.toggle('card--close')
+  calendar.classList.toggle('card--close')
 }
 )
 

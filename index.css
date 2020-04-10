@@ -144,7 +144,7 @@ body {
 	background: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 }
 .container {
-	max-width: 800px;
+	max-width: 1000px;
 	margin: 50px auto;
 	padding: 30px;
 	display: flex;
@@ -177,6 +177,7 @@ body {
 	width: 100%;
 	padding: 20px;
 	display: flex;
+	flex-direction: column;
 	border-radius: 5px;
 	box-shadow: 0 1px 6px -2px #000;
 	background-color: #fff;
@@ -206,4 +207,8 @@ body {
 }
 .card--close {
 	display: none;
+}
+
+.calendar img {
+	width: 100%;
 }
